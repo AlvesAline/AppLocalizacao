@@ -7,10 +7,12 @@ import * as Permissions from 'expo-permissions';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import config from '../../../config';
 
-export default function Servicos(){
+
+export default function Mapa(){
 
     const [origin, setOrigin]=useState(null);
     const [destination, setDestination]=useState(null);
+    const [fetchDetails, setFetchDetails]=useState(true);
 
     useEffect(() => {
         (async function(){
@@ -22,12 +24,10 @@ export default function Servicos(){
                     longitude: location.coords.longitude,
                     latitudeDelta:0.000922,
                     longitudeDelta: 0.000421,
-
-                })
+                });
             } else {
                 throw new Error('Location permission not granted');
             }
-
         })
     })
 
@@ -47,7 +47,17 @@ export default function Servicos(){
             <GooglePlacesAutocomplete
                 placeholder='Para onde vamos ?'
                 onPress={(data, details = null) => {
-                    console.log(data, details);
+
+                    console.log("data aqui",data);
+                    console.log('detalhes', details)
+
+                    // setDestination({
+                    //     latitude: details.geometry.location.lat,
+                    //     longitude: details.geometry.location.lng,
+                    //     latitudeDelta:0.000922,
+                    //     longitudeDelta: 0.000421,
+                    // });
+                    // console.log(destination)
                 }}
                 query={{
                     key: config.googleApi,

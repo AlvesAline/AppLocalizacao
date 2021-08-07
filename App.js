@@ -6,7 +6,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Login from './src/componente/pages/Login';
 import Principal from './src/componente/pages/Principal';
 import { UserContext } from './src/componente/pages/UserContext';
-import Servicos from './src/componente/pages/Servicos';
+import Servicos from './src/componente/pages/Mapa';
 
 
 const Drawer = createDrawerNavigator();
