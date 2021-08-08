@@ -6,7 +6,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Login from './src/componente/pages/Login';
 import Principal from './src/componente/pages/Principal';
 import { UserContext } from './src/componente/pages/UserContext';
-import Servicos from './src/componente/pages/Mapa';
+import Mapa from './src/componente/pages/Mapa';
 
 
 const Drawer = createDrawerNavigator();
@@ -30,7 +30,7 @@ export default function App() {
         {/* <UserContext.Provider value={{ usuario, logar, deslogar }}>
         {logado ? <Principal /> : <Login />}
         </UserContext.Provider> */}
-        <Servicos/>
+        <Mapa/>
     </NavigationContainer>
   );
 }

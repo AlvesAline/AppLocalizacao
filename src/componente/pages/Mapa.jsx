@@ -11,7 +11,7 @@ import MapViewDirections from 'react-native-maps-directions';
 
 export default function Mapa(){
 
-    const mapEL =useRef(null);
+    const mapEl =useRef(null);
     const [origin, setOrigin]=useState(null);
     const [destination, setDestination]=useState(null);
     
@@ -21,11 +21,12 @@ export default function Mapa(){
             const { status, permissions } = await Permissions.askAsync(Permissions.LOCATION);
             if (status === 'granted') {
                 let location = await Location.getCurrentPositionAsync({enableHighAccuracy: true});
+                console.log(location);
                 setOrigin({
                     latitude: location.coords.latitude,
                     longitude: location.coords.longitude,
-                    latitudeDelta:0.00000922,
-                    longitudeDelta: 0.00000421,
+                    latitudeDelta:0.0000922,
+                    longitudeDelta: 0.000421,
                 });
             } else {
                 throw new Error('Location permission not granted');
@@ -41,7 +42,7 @@ export default function Mapa(){
                 showsUserLocation={true}
                 //zoomEnabled={false}
                 loadingEnabled={true}
-                ref={mapEL}
+                ref={mapEl}
             >
                 {destination && 
                     <MapViewDirections
@@ -50,8 +51,9 @@ export default function Mapa(){
                         apikey={config.googleApi}
                         strokeWidth={3}
                         onReady={result=>{
-                            mapEL.current.fitToCoordinates(
-                                result.fitToCoordinates, {
+                            console.log(result);
+                            mapEl.current.fitToCoordinates(
+                                result.coordinates,{
                                     edgePadding:{
                                         top:50,
                                         bottom:50,
@@ -69,13 +71,14 @@ export default function Mapa(){
             <GooglePlacesAutocomplete
                 placeholder='Para onde vamos ?'
                 onPress={(data, details = null) => {
-
+                    //console.log(data, details)
                     setDestination({
                         latitude: details.geometry.location.lat,
                         longitude: details.geometry.location.lng,
                         latitudeDelta:0.000922,
                         longitudeDelta: 0.000421,
                     });
+                    
                     //console.log(destination)
                 }}
                 query={{
